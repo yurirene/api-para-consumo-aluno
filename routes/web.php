@@ -14,7 +14,41 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    $rotas = [
+        'eventos' => [
+            [
+                'path' => '/api/eventos',
+                'type' => 'GET',
+                'description' => 'Listar todos os eventos'
+            ],
+            [
+                'path' => '/api/eventos',
+                'type' => 'POST',
+                'description' => 'Cadastrar um Evento',
+                'parameters' => [
+                    'nome' => 'Nome',
+                    'contato' => 'Contato',
+                    'data' => 'Data do Evento',
+                    'hora' => 'Hora do Evento',
+                    'logradouro' => 'Logradouro',
+                    'numero' => 'Número',
+                    'bairro' => 'Bairro',
+                    'cidade' => 'Cidade',
+                    'uf' => 'Unidade Federativa',
+                    'cep' => 'CEP'
+                ]
+            ],
+            [
+                'path' => '/api/eventos/{id}',
+                'type' => 'DELETE',
+                'description' => 'Apagar um evento',
+                'query_parameters' => [
+                    'id' => 'Id do Evento'
+                ]
+            ]
+        ]
+    ];
+    return response()->json($rotas);
 });
 
 $router->group(['prefix' => 'api'], function() use ($router) {
